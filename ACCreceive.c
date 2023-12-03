@@ -6,8 +6,6 @@
 #include <sys/msg.h>
 #include <sys/types.h>
 
-#define SIZE 512
-
 typedef struct car {
   float speed;
   float distance;
@@ -40,6 +38,7 @@ int main() {
   else if (distance < threshold) {
     printf("\nWe will need to change the cruising speed in order to maintain a safe distance from the car in front\n");
   }
+  
   execl("/home/sys1/Project/menu", "menu", NULL);
   return 0;
 }
