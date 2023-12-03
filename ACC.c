@@ -3,15 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/types.h>
 
-#define SIZE 512
-
 typedef struct car {
-  //char foo[SIZE];
   float speed;
   float distance;
 } ACC;
@@ -27,7 +23,6 @@ int main(int argc, char *argv[]) {
   perror("msgid");
   }
   
-  
   printf("Enter the current speed of our car (in kmph):\n");
   scanf("%f", &sender.speed);
 
@@ -41,4 +36,3 @@ int main(int argc, char *argv[]) {
   execl("/home/sys1/Project/ACCreceive", "ACCreceive", NULL);
   return 0;
 }
-  
