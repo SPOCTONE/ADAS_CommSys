@@ -13,11 +13,11 @@ typedef struct car {
 } ACC;
 
 int main() {
-  int msgid;
-  ACC sender;
-  printf("Sender Function:\n");
+  int msgid; //message queue id
+  ACC sender; //structure variable containing the speed and distance of our car to be sent as a message
+  printf("Sender Function:\n"); 
   
-  if (msgid = msgget((key_t)13, 0666 | IPC_CREAT) == -1) {
+  if (msgid = msgget((key_t)13, 0666 | IPC_CREAT) == -1) { // create message queue
     perror("msgsnd");
   }
 
@@ -27,10 +27,10 @@ int main() {
   printf("Enter the distance between us and the car in front (in metres) :\n");
   scanf("%f", &sender.distance);
   
-  if (msgsnd(msgid, (void *)&sender, 0, 0) == -1) {
+  if (msgsnd(msgid, (void *)&sender, 0, 0) == -1) { // send message to the queue
     perror("msgsnd");
   }
   
-  execl("/home/sys1/Project/ACCreceive", "ACCreceive", NULL);
+  // execl("/home/sys1/Project/ACCreceive", "ACCreceive", NULL);
   return 0;
 }
