@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
   printf("Sender Function:\n");
   ACC sender;
   int msgid;
-  float threshold_distance = 100;
   
   if((msgid = msgget((key_t)1, 0666 | IPC_CREAT)) == -1) {
   perror("msgid");
