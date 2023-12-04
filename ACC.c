@@ -12,13 +12,13 @@ typedef struct car {
   float distance;
 } ACC;
 
-int main(int argc, char *argv[]) {
+int main() {
 
   printf("Sender Function:\n");
   ACC sender;
   int msgid;
   
-  if((msgid = msgget((key_t)1, 0666 | IPC_CREAT)) == -1) {
+  if((msgid = msgget((key_t)13, 0666 | IPC_CREAT)) == -1) {
   perror("msgid");
   }
   
