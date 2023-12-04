@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +18,7 @@ int main() {
   ACC sender; //structure variable containing the speed and distance of our car to be sent as a message
   printf("Sender Function:\n"); 
   
-  if (msgid = msgget((key_t)13, 0666 | IPC_CREAT) == -1) { // create message queue
+  if ((msgid = msgget((key_t)13, 0666 | IPC_CREAT)) == -1) { // create message queue
     perror("msgsnd");
   }
 

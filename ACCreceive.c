@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,9 +16,10 @@ typedef struct car {
 int main() {
   int msgid; //message queue id
   ACC receive; //structure variable containing the speed and distance of our car to be received as a message
+  float frontSpeed;
   printf("\nReceiver Function:\n");
 
-  if (msgid = msgget((key_t)13, 0666 | IPC_CREAT) == -1) { // create message queue
+  if ((msgid = msgget((key_t)13, 0666 | IPC_CREAT)) == -1) { // create message queue
     perror("msgsnd");
   }
   
@@ -39,6 +41,33 @@ int main() {
   } 
   else {
     printf("\nWe will need to change the cruising speed in order to maintain a safe distance from the car in front\n");
+    printf("Enter the current speed of the car in our front(in kmph):\n");
+    scanf("%f", &frontSpeed);
+    printf("Automatically adjusting the speed of your car to match the speed of the car in front of you.\n");
+    if(frontSpeed > receive.speed) {
+      while (frontSpeed != receive.speed) {
+        sleep(1);
+        receive.speed = receive.speed + 16.4592;
+        if (receive.speed > frontSpeed) {
+          printf("%.4f\n", frontSpeed);
+          break;
+        }
+        printf("%.4f\n", receive.speed);
+      }
+      printf("Speed matching is completed.\n");
+    }
+    else {
+      while (frontSpeed != receive.speed) {
+        sleep(1);
+        receive.speed = receive.speed - 16.4592;
+        if (receive.speed < frontSpeed) {
+          printf("%.4f\n", frontSpeed);
+          break;
+        }
+        printf("%.4f\n", receive.speed);
+      }
+      printf("Speed matching is completed.\n");
+    }
   }
   
   // execl("/home/sys1/Project/menu", "menu", NULL);

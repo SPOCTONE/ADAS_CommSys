@@ -42,6 +42,6 @@ int main() {
   printf("\nData shared successfully\n");
 
   shmdt(sender); //detach from shared memory
-  //execl("/home/sys1/Project/CASalert", "CASalert", NULL);
+  execl("CASalert", "CASalert", NULL);
   return 0;
 }

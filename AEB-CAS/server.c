@@ -18,11 +18,6 @@ typedef struct collision {
 } car;
 
 int main() {
-
-  key_t key = ftok("shmfile", 13);
-  int shmid = shmget(key, 1024, 0666 | IPC_CREAT);
-  car *ptr = (car *)shmat(shmid, NULL, 0);
-
   int serverSocket;
   struct sockaddr_in serverAddr;
 
@@ -30,6 +25,10 @@ int main() {
   struct sockaddr_in newAddr;
 
   socklen_t addr_size;
+
+  key_t key = ftok("shmfile", 13);
+  int shmid = shmget(key, 1024, 0666 | IPC_CREAT);
+  car *ptr = (car *)shmat(shmid, NULL, 0);
 
   serverSocket = socket(AF_INET, SOCK_STREAM, 0);
   printf("[+]Server Socket Created Sucessfully.\n");
@@ -44,12 +43,12 @@ int main() {
 
   listen(serverSocket, 5);
   printf("[+]Listening...\n");
-  
+
   newSocket = accept(serverSocket, (struct sockaddr *)&newAddr, &addr_size);
-  
+
   send(newSocket, &ptr->speed, sizeof(ptr->speed), 0);
   // passing the value which is received from CAS via shared memory.
-  
+
   printf("\n[+]Closing the connection.\n");
   shmctl(shmid, IPC_RMID, NULL);
   shmdt(ptr);

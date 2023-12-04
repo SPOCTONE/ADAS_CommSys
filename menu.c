@@ -37,6 +37,7 @@ int main() {
     case 5: // BSD
       //execl("/home/sys1/Project/BSD", "BSD", NULL);
       system("./BSD");
+      system("./BSDalert");
       break;
 
     case 6: //exiting
