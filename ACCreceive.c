@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -14,8 +15,7 @@ typedef struct car {
 int main() {
   ACC receive;
   printf("\nReceiver Function:\n");
-  int msgid = msgget((key_t)1, 0666 | IPC_CREAT);
-  
+  int msgid = msgget((key_t)13, 0666 | IPC_CREAT);
   
   if((msgrcv(msgid, (void *)&receive, 0, 0, 0)) == -1) {
   perror("msgrcv");

@@ -13,15 +13,14 @@ typedef struct car {
 } ACC;
 
 int main() {
-
-  printf("Sender Function:\n");
-  ACC sender;
   int msgid;
+  ACC sender;
+  printf("Sender Function:\n");
   
-  if((msgid = msgget((key_t)13, 0666 | IPC_CREAT)) == -1) {
-  perror("msgid");
+  if (msgid = msgget((key_t)13, 0666 | IPC_CREAT) == -1) {
+    perror("msgsnd");
   }
-  
+
   printf("Enter the current speed of our car (in kmph):\n");
   scanf("%f", &sender.speed);
 

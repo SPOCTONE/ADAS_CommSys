@@ -12,7 +12,7 @@ typedef struct collision {
 int main() {
 
   int i = 0;
-  key_t key = ftok("shmfile", 6597);
+  key_t key = ftok("shmfile", 13);
   int shmid = shmget(key, 1024, 0666 | IPC_CREAT);
   car *ptr = (car *)shmat(shmid, NULL, 0);
   
@@ -22,7 +22,8 @@ int main() {
   printf("Are the cameras detecting any obstacle? Press Yes (Y) or No (N): ");
   scanf(" %c", &ptr->choice);
   
-  char *camDir[] = {"front", "left", "right", "front"};
+  char *camDir[] = {"front", "left", "right", "back"};
+  
   if (ptr->choice == 'Y' || ptr->choice == 'y') {
     for (int i = 0; i < 4; i++) {
       printf("Enter 1 if the camera %d at the %s is detecting an obstacle, 0 if not : ", i + 1, camDir[i]);
@@ -36,7 +37,7 @@ int main() {
       }
     }
   }
-  printf("\nData shared successfully");
+  printf("\nData shared successfully\n");
   shmdt(ptr);
   execl("/home/sys1/Project/CASalert", "CASalert", NULL);
   return 0;

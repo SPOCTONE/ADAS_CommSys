@@ -10,10 +10,11 @@
 #define PORT 4444
 
 int main() {
+  
+  float speed;
   int clientSocket;
   struct sockaddr_in serverAddr;
-  float speed;
-
+  
   clientSocket = socket(PF_INET, SOCK_STREAM, 0);
   printf("[+]Client Socket Created Sucessfully.\n");
 
@@ -41,6 +42,7 @@ int main() {
   }
   printf("The car has been stopped safely.\n");
   printf("\n[+]Closing the connection.\n");
+
   execl("/home/sys1/Project/menu", "menu", NULL);
   return 0;
 }
