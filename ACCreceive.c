@@ -33,8 +33,8 @@ int main() {
   if (receive.distance >= threshold) {
     printf("\nWe will continue cruising at the same speed\n");
   } 
-  else if (receive.distance < threshold) {
-    printf("\nWe will need to change the cruising receive.speed in order to maintain a safe distance from the car in front\n");
+  else {
+    printf("\nWe will need to change the cruising speed in order to maintain a safe distance from the car in front\n");
   }
   
   execl("/home/sys1/Project/menu", "menu", NULL);
