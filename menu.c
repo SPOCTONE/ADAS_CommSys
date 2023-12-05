@@ -15,7 +15,6 @@ int main() {
     case 1: // CAS
       //execl("/home/sys1/Project/CAS", "CAS", NULL);
       system("./CAS");
-      system("./CASalert");
       break;
 
     case 2: // LDW

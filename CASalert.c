@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include <sys/shm.h>
 #include <unistd.h>
@@ -13,7 +14,7 @@ typedef struct collision { // structure for sharing data between CAS.c and CASal
 int main() {
 
   key_t key = ftok("shmfile", 13); // ftok to generate unique key
-  uint32_t shmid = shmget(key, 1024, 0666 | IPC_CREAT); // shmget returns an identifier in shmid
+  uint8_t shmid = shmget(key, 1024, 0666 | IPC_CREAT); // shmget returns an identifier in shmid
   car *receive = (car *)shmat(shmid, NULL, 0); // shmat to attach to shared memory
 
   printf("Data read from shared memory\n");
@@ -32,7 +33,7 @@ int main() {
 
         if ((receive->distance[i] < thresholdDistance) && i!=3) { // if the distance is less than the threshold distance
           printf("Alert! Collision may occur in the field of view of camera %d at the %s\n\n", i + 1, camDir[i]);
-          execl("AEB-CAS/client", "client", NULL);
+          execl("CASclient", "CASclient", NULL);
         } 
         else if((receive->distance[i] < thresholdDistance) && i==3) { // If the back camera has an obstacle in the blind spot we dont want the car to stop
           printf("Alert! Collision may occur in the field of view of camera %d at the %s\n\n", i + 1, camDir[i]);
@@ -45,7 +46,7 @@ int main() {
   } 
   else {
     printf("You're good to go\n\n");
-    //execl("/home/sys1/Project/menu", "menu", NULL);
+    execl("menu", "menu", NULL);
   }
 
   shmdt(receive);
