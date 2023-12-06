@@ -45,16 +45,7 @@ int main() {
     scanf("%f", &frontSpeed);
     printf("Automatically adjusting the speed of your car to match the speed of the car in front of you.\n");
     if(frontSpeed > receive.speed) {
-      while (frontSpeed != receive.speed) {
-        sleep(1);
-        receive.speed = receive.speed + 16.4592;
-        if (receive.speed > frontSpeed) {
-          printf("%.4f\n", frontSpeed);
-          break;
-        }
-        printf("%.4f\n", receive.speed);
-      }
-      printf("Speed matching is completed.\n");
+      printf("The speed of the car in front is more than the speed of your car\n");
     }
     else {
       while (frontSpeed != receive.speed) {
